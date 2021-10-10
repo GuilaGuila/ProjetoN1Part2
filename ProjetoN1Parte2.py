@@ -1,26 +1,7 @@
-#Uma instituição de ensino superior precisa de um sistema para gerenciar o processo de inscrições em
-#um evento técnico. O sistema deve permitir a implementação das seguintes histórias de usuário:
-#H1.: Como gestor do sistema gostaria de cadastrar novos usuários pelo seu nome completo e e-mail.
-#H2.: Como gestor do sistema gostaria de exibir todos os usuários cadastrados, listando-os por ordem
-#de cadastro.
-#H3.: Como gestor do sistema gostaria de exibir todos os usuários cadastros, listando-os por ordem
-#alfabética.
-#H4.: Como gestor do sistema gostaria de verificar se um usuário faz parte da lista de participantes,
-#buscando-o pelo seu nome.
-#H5.: Como gestor do sistema gostaria poder remover um usuário cadastrado, buscando-o por seu email.
-#H6.: Como gestor do sistema gostaria de poder alterar o nome de um usuário cadastrado no sistema,
-#buscando-o por seu e-mail.
-
-#cadastrar novo usuário
-#exibir usuários (ordem alfabética ou ordem de cadastro)
-#pesquisar cadastro 
-#remover cadastro
-#alterar cadastro 
-
 listaUsuarios = []
 
 def cadastrarUsuario():
-    i = int(input("Quantos usuários deseja cadastrar?"))
+    i = int(input("Quantos usuários deseja cadastrar? "))
     for x in range(1,i + 1):
         print("Cadastro do usuário {}º ".format(x))
         nome = input("Informe o nome: ")
@@ -51,13 +32,40 @@ def exibirCadastros():
     input("Pressione qualquer tecla para voltar para o menu principal.")
     menuPrincipal()
 
-
-
 def pesquisarCadastro():
-    print("3")
+    opcao = 1
+    while opcao == 1:
+        nome = input("Informe o nome do Usuário: ")
+        for usuario in listaUsuarios:
+            if(usuario["Nome"] == nome):
+                print("-----------------------------")
+                print("Nome: ", usuario["Nome"])
+                print("E-mail: ", usuario["E-mail"])
+                break
+            else:
+                print("Usuário Inexistente")
+                break
+        print("1- Pesquisar novamente ")
+        print("2- Voltar para o menu principal ")
+        opcao = int(input())
+    menuPrincipal()
 
 def removerCadastro():
-    print("4")
+    opcao = 1
+    while opcao == 1:
+        mail = input("Digite o E-mail do Usuário: ")
+        for email in listaUsuarios:
+            if(email["E-mail"] == mail):
+                listaUsuarios.remove(email)
+                print("Usuário removido com sucesso")
+                break
+            else:
+                print("Usuário Inexistente")
+                break
+        print("1- Remover outro usuário ")
+        print("2- Voltar para o menu principal ")
+        opcao = int(input())
+    menuPrincipal()
 
 def alterarCadastro():
     print("5")
