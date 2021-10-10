@@ -17,7 +17,7 @@
 #remover cadastro
 #alterar cadastro 
 
-listaUsarios = []
+listaUsuarios = []
 
 def cadastrarUsuario():
     i = int(input("Quantos usuários deseja cadastrar?"))
@@ -26,16 +26,32 @@ def cadastrarUsuario():
         nome = input("Informe o nome: ")
         email = input("Informe o E-mail: ")
         aluno = {"Nome": nome, "E-mail": email}
-        listaUsarios.append(aluno)
+        listaUsuarios.append(aluno)
         print("Usuário cadastrado com sucesso!")
 
     input("Pressione qualquer tecla para voltar para o menu principal.")
     menuPrincipal()
-    
-
 
 def exibirCadastros():
-    print("2")
+    print("1 - Exibir por ordem de cadastro")
+    print("2 - Exibir por ordem alfabética")
+    n = int(input())
+    if(n == 1):
+        for usuario in listaUsuarios:
+            print("-----------------------------")
+            print("Nome: ", usuario["Nome"])
+            print("E-mail: ", usuario["E-mail"])
+    elif(n == 2):
+        novaLista = sorted(listaUsuarios, key=lambda d: d["Nome"])
+        for usuario in novaLista:
+            print("-----------------------------")
+            print("Nome: ", usuario["Nome"])
+            print("E-mail: ", usuario["E-mail"])
+
+    input("Pressione qualquer tecla para voltar para o menu principal.")
+    menuPrincipal()
+
+
 
 def pesquisarCadastro():
     print("3")
