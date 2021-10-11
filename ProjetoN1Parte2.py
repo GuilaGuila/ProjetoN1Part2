@@ -68,7 +68,22 @@ def removerCadastro():
     menuPrincipal()
 
 def alterarCadastro():
-    print("5")
+    opcao = 1
+    while opcao == 1:
+        email = input("Digite o E-mail do Usuário: ")
+        for usuario in listaUsuarios:
+            if(email == usuario["E-mail"]):
+                nome = input("Digite o novo nome do usuário: ")
+                usuario["Nome"] = nome
+                print("Alteração realizada com sucesso ")
+                break
+            else:
+                print("Usuário não encontrado")
+                break
+        print("1- Alterar outro usuário ")
+        print("2- Voltar para o menu principal ")
+        opcao = int(input())
+    menuPrincipal()
 
 
 
@@ -91,6 +106,7 @@ def menuPrincipal():
     elif(n == 5):
         alterarCadastro()
     elif(n == 6):
+        print("Até logo.")
         exit()
     else:
         print("Opção Inválida!")
