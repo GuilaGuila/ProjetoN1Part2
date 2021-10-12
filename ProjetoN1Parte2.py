@@ -1,62 +1,78 @@
+import os
+import time
+
 listaUsuarios = []
+
+def clearConsole():
+    command = 'clear'
+    if os.name in ('nt', 'dos'):
+        command = 'cls'
+    os.system(command)
+
+def mostrarUsuarios(usuario):
+    print("-----------------------------")
+    print("Nome: ", usuario["Nome"])
+    print("E-mail: ", usuario["E-mail"])
 
 def cadastrarUsuario():
     i = int(input("Quantos usuários deseja cadastrar? "))
+    clearConsole()
     for x in range(1,i + 1):
         print("Cadastro do usuário {}º ".format(x))
-        nome = input("Informe o nome: ")
-        email = input("Informe o E-mail: ")
+        nome = input("Informe o nome: ").strip()
+        email = input("Informe o E-mail: ").strip()
         aluno = {"Nome": nome, "E-mail": email}
         listaUsuarios.append(aluno)
+        clearConsole()
         print("Usuário cadastrado com sucesso!")
 
-    input("Pressione qualquer tecla para voltar para o menu principal.")
+    input("Pressione qualquer tecla para voltar para o menu principal")
+    clearConsole()
     menuPrincipal()
 
 def exibirCadastros():
     print("1 - Exibir por ordem de cadastro")
     print("2 - Exibir por ordem alfabética")
     n = int(input())
+    clearConsole()
     if(n == 1):
         for usuario in listaUsuarios:
-            print("-----------------------------")
-            print("Nome: ", usuario["Nome"])
-            print("E-mail: ", usuario["E-mail"])
+            mostrarUsuarios(usuario)
     elif(n == 2):
         novaLista = sorted(listaUsuarios, key=lambda d: d["Nome"])
         for usuario in novaLista:
-            print("-----------------------------")
-            print("Nome: ", usuario["Nome"])
-            print("E-mail: ", usuario["E-mail"])
+            mostrarUsuarios(usuario)
+    else:
+        print("Opção Inválida!")
+        time.sleep(2)
+        clearConsole()
+        exibirCadastros()
 
-    input("Pressione qualquer tecla para voltar para o menu principal.")
+    input("Pressione qualquer tecla para voltar para o menu principal")
+    clearConsole()
     menuPrincipal()
 
 def pesquisarCadastro():
     opcao = 1
     while opcao == 1:
-        nome = input("Informe o nome do Usuário: ")
+        nome = input("Informe o nome do Usuário: ").strip()
         for usuario in listaUsuarios:
             if(usuario["Nome"] == nome):
-                print("-----------------------------")
-                print("Nome: ", usuario["Nome"])
-                print("E-mail: ", usuario["E-mail"])
-                break
-            else:
-                print("Usuário Inexistente")
+                mostrarUsuarios(usuario)
                 break
         print("1- Pesquisar novamente ")
         print("2- Voltar para o menu principal ")
         opcao = int(input())
+        clearConsole()
     menuPrincipal()
 
 def removerCadastro():
     opcao = 1
     while opcao == 1:
-        mail = input("Digite o E-mail do Usuário: ")
-        for email in listaUsuarios:
-            if(email["E-mail"] == mail):
-                listaUsuarios.remove(email)
+        email = input("Digite o E-mail do Usuário: ").strip()
+        for usuario in listaUsuarios:
+            if(usuario["E-mail"] == email):
+                listaUsuarios.remove(usuario)
                 print("Usuário removido com sucesso")
                 break
             else:
@@ -65,15 +81,16 @@ def removerCadastro():
         print("1- Remover outro usuário ")
         print("2- Voltar para o menu principal ")
         opcao = int(input())
+    clearConsole()
     menuPrincipal()
 
 def alterarCadastro():
     opcao = 1
     while opcao == 1:
-        email = input("Digite o E-mail do Usuário: ")
+        email = input("Digite o E-mail do Usuário: ").strip()
         for usuario in listaUsuarios:
             if(email == usuario["E-mail"]):
-                nome = input("Digite o novo nome do usuário: ")
+                nome = input("Digite o novo nome do usuário: ").strip()
                 usuario["Nome"] = nome
                 print("Alteração realizada com sucesso ")
                 break
@@ -83,11 +100,11 @@ def alterarCadastro():
         print("1- Alterar outro usuário ")
         print("2- Voltar para o menu principal ")
         opcao = int(input())
+    clearConsole()
     menuPrincipal()
 
-
-
 def menuPrincipal():
+    print("----------MENU----------")
     print("1 - Cadastrar Usuário")
     print("2 - Exibir Cadastros")
     print("3 - Pesquisar Cadastro")
@@ -96,27 +113,31 @@ def menuPrincipal():
     print("6 - Encerrar")
     n = int(input())
     if(n == 1):
+        clearConsole()
         cadastrarUsuario()
     elif(n == 2):
+        clearConsole()
         exibirCadastros()
     elif(n == 3):
+        clearConsole()
         pesquisarCadastro()
     elif(n == 4):
+        clearConsole()
         removerCadastro()
     elif(n == 5):
+        clearConsole()
         alterarCadastro()
     elif(n == 6):
         print("Até logo.")
         exit()
     else:
         print("Opção Inválida!")
-
-
+        time.sleep(2)
+        clearConsole()
+        menuPrincipal()
 
 def main():
     menuPrincipal()
 
 if __name__ == "__main__":
     main()
-
-
