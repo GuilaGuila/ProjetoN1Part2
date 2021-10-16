@@ -26,6 +26,7 @@ def cadastrarUsuario():
         clearConsole()
         print("Usuário cadastrado com sucesso!")
 
+    print("\n")
     input("Pressione qualquer tecla para voltar para o menu principal")
     clearConsole()
     menuPrincipal()
@@ -48,6 +49,7 @@ def exibirCadastros():
         clearConsole()
         exibirCadastros()
 
+    print("\n")
     input("Pressione qualquer tecla para voltar para o menu principal")
     clearConsole()
     menuPrincipal()
@@ -60,6 +62,7 @@ def pesquisarCadastro():
             if(usuario["Nome"] == nome):
                 mostrarUsuarios(usuario)
                 break
+        print("\n")
         print("1- Pesquisar novamente ")
         print("2- Voltar para o menu principal ")
         opcao = int(input())
@@ -70,33 +73,34 @@ def removerCadastro():
     opcao = 1
     while opcao == 1:
         email = input("Digite o E-mail do Usuário: ").strip()
+        listLength = len(listaUsuarios)
         for usuario in listaUsuarios:
             if(usuario["E-mail"] == email):
                 listaUsuarios.remove(usuario)
                 print("Usuário removido com sucesso")
                 break
-            else:
-                print("Usuário Inexistente")
-                break
+        if(listLength == len(listaUsuarios)):
+            print("Usuário inexistente")
+        
+        print("\n")
         print("1- Remover outro usuário ")
         print("2- Voltar para o menu principal ")
         opcao = int(input())
-    clearConsole()
+        clearConsole()
     menuPrincipal()
 
 def alterarCadastro():
     opcao = 1
     while opcao == 1:
-        email = input("Digite o E-mail do Usuário: ").strip()
+        email = input("Digite o E-mail do usuário que deseja alterar: ").strip()
         for usuario in listaUsuarios:
             if(email == usuario["E-mail"]):
                 nome = input("Digite o novo nome do usuário: ").strip()
                 usuario["Nome"] = nome
                 print("Alteração realizada com sucesso ")
                 break
-            else:
-                print("Usuário não encontrado")
-                break
+            
+        print("\n")
         print("1- Alterar outro usuário ")
         print("2- Voltar para o menu principal ")
         opcao = int(input())
